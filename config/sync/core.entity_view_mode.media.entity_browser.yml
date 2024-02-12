@@ -1,0 +1,11 @@
+uuid: a12b2f90-4490-41b0-b472-4fd9c83540c8
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+id: media.entity_browser
+label: 'Entity browser'
+description: ''
+targetEntityType: media
+cache: true

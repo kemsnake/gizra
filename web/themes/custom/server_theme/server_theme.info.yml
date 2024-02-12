@@ -1,0 +1,41 @@
+name: Drupal 10 Starter Theme
+type: theme
+description: 'A foundation for building a theme for Drupal Starter.'
+package: Server
+core_version_requirement: ^9 || ^10
+libraries:
+  - server_theme/global-styling
+  - server_theme/global-scripts
+  - server_theme/font-awesome
+  - server_theme/opensans
+  - server_theme/roboto
+
+logo: logo.svg
+
+base theme: classy
+
+regions:
+  header: Header
+  content: Content
+  footer: Footer
+
+# Remove CSS files by overriding libraries.
+libraries-override:
+  classy/base:
+    css:
+      component:
+        css/components/details.css: false
+        css/components/form.css: false
+        css/components/links.css: false
+  classy/file:
+    css:
+      component:
+        css/components/file.css: false
+  classy/messages:
+    css:
+      component:
+        css/components/messages.css: false
+  system/base:
+    css:
+      components:
+        /themes/contrib/stable/css/system/components/ajax-progress.module.css: false

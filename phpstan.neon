@@ -1,0 +1,26 @@
+includes:
+  - vendor/mglaman/phpstan-drupal/extension.neon
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+parameters:
+  level: 6
+  checkMissingIterableValueType: false
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    - '#has no return type specified.#'
+    - '#Access to an undefined property Drupal\\Core\\Field\\FieldItemListInterface::\$value.#'
+    - '#Access to an undefined property Drupal\\Core\\Field\\FieldItemInterface::\$value.#'
+  paths:
+    - web
+    - RoboFile.php
+    - robo-components
+  excludePaths:
+    - '*.api.php'
+    - '*/tests/fixtures/*.php'
+    - 'web/core/*'
+    - 'web/sites/default/files/*'
+    - 'web/sites/default/default.settings.php'
+    - 'web/sites/default/settings.php'
+    - 'web/modules/contrib/*'
+    - 'web/themes/contrib/*'
+    - 'web/libraries/*'
+    - 'web/sites/simpletest/*'

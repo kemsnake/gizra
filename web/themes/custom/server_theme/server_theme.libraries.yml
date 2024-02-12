@@ -1,0 +1,66 @@
+global-styling:
+  version: 1.0
+  css:
+    theme:
+      dist/css/style.css: {}
+
+global-scripts:
+  js:
+    # General JS
+    dist/js/scripts.js: {}
+    # Header menu
+    dist/js/header-menu.js: {}
+    # Search
+    dist/js/search.js: {}
+    # Toggle hide/show using button.
+    dist/js/toggler.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+    - server_theme/anchor
+
+
+# "View more" button.
+view-more:
+  js:
+    dist/js/view-more.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+
+roboto:
+  css:
+    base:
+      '//fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap': { external: true }
+
+opensans:
+  css:
+    base:
+      '//fonts.googleapis.com/css?family=Open+Sans:400,400i,700': { external: true }
+
+font-awesome:
+  css:
+    theme:
+      /libraries/fontawesome/css/all.min.css: {}
+
+slick:
+  js:
+    /libraries/slick-carousel/slick/slick.js: {}
+    dist/js/slick-carousel.js: {}
+  css:
+    theme:
+      # Lower weight, as we'd want our custom css to be able to override slick's
+      # default CSS.
+      /libraries/slick-carousel/slick/slick.css: { weight: -10 }
+      /libraries/slick-carousel/slick/slick-theme.css: { weight: -9 }
+  dependencies:
+    - core/jquery
+
+# Add anchors to headings.
+anchor:
+  js:
+    /libraries/anchor-js/anchor.min.js: {}
+  dependencies:
+    - core/drupal

@@ -1,0 +1,5 @@
+name: "Server General"
+type: module
+description: "General and common functionality"
+core_version_requirement: ^9 || ^10
+package: "server"

@@ -1,0 +1,18 @@
+uuid: 13ca0114-0815-46bb-8b22-086f079bfc9f
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - system
+    - toolbar
+id: content_editor
+label: 'Content Editor'
+weight: -7
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access toolbar'
+  - 'administer nodes'
+  - 'view own unpublished content'
+  - 'view the administration theme'
