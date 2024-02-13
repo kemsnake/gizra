@@ -37,7 +37,7 @@ trait ElementNodeGroupTrait {
   protected function buildElementNodeGroup(string $title, string $label, array $body, array $subscribe_text): array {
     $elements = [];
 
-    // Header.
+    // Header element.
     $element = $this->buildHeader(
       $title,
       $label,
