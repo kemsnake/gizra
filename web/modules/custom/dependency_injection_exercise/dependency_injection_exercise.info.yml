@@ -1,0 +1,5 @@
+name: Dependecy injection exercise
+type: module
+description: 'Contains exercises for Dependency Injection.'
+package: Dropsolid
+core_version_requirement: ^9 || ^10
