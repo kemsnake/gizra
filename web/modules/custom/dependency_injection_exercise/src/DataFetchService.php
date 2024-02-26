@@ -6,6 +6,9 @@ use Drupal\Component\Serialization\Json;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * Service for fetch image data.
+ */
 class DataFetchService {
 
   /**
@@ -25,6 +28,15 @@ class DataFetchService {
     $this->httpClient = $http_client;
   }
 
+  /**
+   * Method to get data from external resource.
+   *
+   * @param int $album_id
+   *  Id of the external album.
+   *
+   * @return false|mixed
+   *  Array of json image data or FALSE.
+   */
   public function get(int $album_id = 5) {
     // Try to obtain the photo data via the external API.
     try {
