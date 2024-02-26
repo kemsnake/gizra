@@ -1,0 +1,5 @@
+services:
+  dependency_injection_exercise.data_fetcher:
+    class: Drupal\dependency_injection_exercise\DataFetchService
+    arguments:
+      - '@http_client'
