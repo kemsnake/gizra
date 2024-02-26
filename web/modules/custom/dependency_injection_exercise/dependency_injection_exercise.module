@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Module file.
+ */
+
+/**
+ * Implements hook_module_implements_alter().
+ *
+ * Our hook should be the last one.
+ */
+function dependency_injection_exercise_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'mail_alter') {
+    $group = $implementations['dependency_injection_exercise'];
+    unset($implementations['dependency_injection_exercise']);
+    $implementations['dependency_injection_exercise'] = $group;
+  }
+}
+
+/**
+ * Implements hook_mail_alter().
+ *
+ * Reroute emails.
+ */
+function dependency_injection_exercise_mail_alter(&$message) {
+  // Basic checks for variable.
+  if (empty($message) || !is_array($message)) {
+    return;
+  }
+
+  $message['to'] = 'nope@doesntexist.com';
+
+  // Create a log record.
+  \Drupal::logger('dependency_injection_exercise')
+    ->notice('An email has been rerouted to nope@doesntexist.com');
+
+}
