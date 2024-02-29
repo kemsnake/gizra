@@ -5,7 +5,6 @@ namespace Drupal\server_style_guide\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
-use Drupal\image\Entity\ImageStyle;
 use Drupal\pluggable_entity_view_builder\BuildFieldTrait;
 use Drupal\server_general\ButtonTrait;
 use Drupal\server_general\ElementLayoutTrait;
@@ -29,7 +28,6 @@ use Drupal\server_general\SocialShareTrait;
 use Drupal\server_general\TagTrait;
 use Drupal\server_general\TitleAndLabelsTrait;
 use Drupal\server_style_guide\StyleGuideElementWrapTrait;
-use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -125,14 +123,6 @@ class StyleGuideController extends ControllerBase {
     $element = $this->getPageTitle();
     $build[] = $this->wrapElementWideContainer($element, 'Page title');
 
-    $element = $this->getPersonBlock();
-    $build[] = $this->wrapElementWideContainer($element, 'Person block');
-
-    for ($i = 1; $i <= 10; $i++) {
-      $elements[] = $this->getPersonBlock();
-    }
-    $build[] = $this->wrapElementWideContainer($elements, 'Person blocks');
-
     $build[] = $this->getButtons();
 
     $build[] = $this->getLinks();
@@ -211,28 +201,6 @@ class StyleGuideController extends ControllerBase {
     return [
       '#theme' => 'server_theme_page_title',
       '#title' => 'The source has extend, but not everyone fears it',
-    ];
-  }
-
-
-  /**
-   * Get the page title.
-   *
-   * @return array
-   *   Render array.
-   */
-  protected function getPersonBlock(): array {
-    $account = User::load(6);
-
-    $style = ImageStyle::load('thumbnail');
-    $style_uri = $style->buildUri($account->get('user_picture')->entity->uri->value);
-    $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($style_uri);
-    return [
-      '#theme' => 'server_style_guide_person',
-      '#image_src' => $image_url,
-      '#name' => $account->getAccountName(),
-      '#job_title' => 'Paradigm Representative',
-      '#role' => 'Admin',
     ];
   }
 
