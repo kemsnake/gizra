@@ -1,0 +1,15 @@
+uuid: cc88cbcf-146f-4793-82f8-bd5be537da2d
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.group
+id: node-group-member
+label: Member
+weight: 1
+group_id: null
+group_type: node
+group_bundle: group
+is_admin: null
+permissions: {  }
+role_type: required
