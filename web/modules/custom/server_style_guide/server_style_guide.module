@@ -51,6 +51,18 @@ function server_style_guide_theme() {
     ],
   ];
 
+  // A person container.
+  $info['server_style_guide_person'] = [
+    'variables' => [
+      'image_src' => NULL,
+      'name' => NULL,
+      'job_title' => NULL,
+      'role' => NULL,
+      'email' => NULL,
+      'phone' => NULL,
+    ],
+  ];
+
   return $info;
 }
 
