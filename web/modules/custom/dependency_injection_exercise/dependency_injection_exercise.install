@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * @file
+ * Contains install and update function for the dependency injection exercise.
+ */
+
+use Drupal\menu_link_content\Entity\MenuLinkContent;
+
+/**
+ * Implements hook_install().
+ */
+function dependency_injection_exercise_install(): void {
+  MenuLinkContent::create([
+    'title' => 'Photos',
+    'link' => [
+      'uri' => 'internal:/dropsolid/example/photos'
+    ],
+    'menu_name' => 'main',
+    'expanded' => TRUE,
+  ])->save();
+}
