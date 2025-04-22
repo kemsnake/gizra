@@ -6,6 +6,7 @@ use Drupal\Core\Link;
 use Drupal\Core\Url;
 use Drupal\node\Entity\NodeType;
 use Drupal\node\NodeInterface;
+use Drupal\og\Og;
 use Drupal\og\OgMembershipInterface;
 use Drupal\server_general\ElementNodeGroupTrait;
 use Drupal\server_general\EntityViewBuilder\NodeViewBuilderAbstract;
@@ -74,8 +75,13 @@ class OrganicGroupCustom extends NodeViewBuilderAbstract {
     $node_type = NodeType::load($entity->bundle());
     $label = $node_type->label();
 
+    // Check membership.
+    $is_member = Og::isMember($entity, $this->currentUser);
+    if ($is_member) {
+      $subscribe_text = $this->t('You already subscribed to this group.');
+    }
     /** @var \Drupal\Core\Access\AccessResult $access */
-    if (
+    elseif (
       (($access = $this->ogAccess->userAccess($entity, 'subscribe', $this->currentUser)) && $access->isAllowed())
       || (($access = $this->ogAccess->userAccess($entity, 'subscribe without approval', $this->currentUser)) && $access->isAllowed())
     ) {
