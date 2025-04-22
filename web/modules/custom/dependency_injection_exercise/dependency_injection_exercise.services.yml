@@ -1,0 +1,10 @@
+services:
+  dependency_injection_exercise.data_fetcher:
+    class: Drupal\dependency_injection_exercise\DataFetchService
+    arguments:
+      - '@http_client'
+  dependency_injection_exercise.breadcrumb:
+    class: Drupal\dependency_injection_exercise\CustomBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 10 }
+    public: false
