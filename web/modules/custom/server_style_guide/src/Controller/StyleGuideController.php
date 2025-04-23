@@ -5,6 +5,7 @@ namespace Drupal\server_style_guide\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Link;
 use Drupal\Core\Url;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\pluggable_entity_view_builder\BuildFieldTrait;
 use Drupal\server_general\ButtonTrait;
 use Drupal\server_general\ElementLayoutTrait;
@@ -28,6 +29,7 @@ use Drupal\server_general\SocialShareTrait;
 use Drupal\server_general\TagTrait;
 use Drupal\server_general\TitleAndLabelsTrait;
 use Drupal\server_style_guide\StyleGuideElementWrapTrait;
+use Drupal\user\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -123,6 +125,14 @@ class StyleGuideController extends ControllerBase {
     $element = $this->getPageTitle();
     $build[] = $this->wrapElementWideContainer($element, 'Page title');
 
+    $element = $this->getPersonBlock();
+    $build[] = $this->wrapElementWideContainer($element, 'Person block');
+
+    for ($i = 1; $i <= 10; $i++) {
+      $elements[] = $this->getPersonBlock();
+    }
+    $build[] = $this->wrapElementWideContainer($elements, 'Person blocks');
+
     $build[] = $this->getButtons();
 
     $build[] = $this->getLinks();
@@ -201,6 +211,66 @@ class StyleGuideController extends ControllerBase {
     return [
       '#theme' => 'server_theme_page_title',
       '#title' => 'The source has extend, but not everyone fears it',
+    ];
+  }
+
+  /**
+   * Get the page title.
+   *
+   * @return array
+   *   Render array.
+   */
+  protected function getPersonBlock(): array {
+    $account = User::load(4);
+
+    $image = [
+      '#theme' => 'image_style',
+      '#style_name' => 'thumbnail',
+      '#uri' => $account->get('user_picture')->entity->uri->value,
+      '#attributes' => [
+        'class' => [
+          'w-32',
+          'h-32',
+          'rounded-3xl',
+        ],
+      ],
+    ];
+
+    $name = [
+      '#theme' => 'server_style_guide_person_title',
+      '#title' => $account->getAccountName(),
+      '#text_font' => 'text-sm',
+      '#text_size' => 'text-gray-900',
+    ];
+    $job_title = [
+      '#theme' => 'server_style_guide_person_title',
+      '#title' => 'Paradigm Representative',
+      '#text_size' => 'text-sm',
+      '#text_font' => 'text-gray-500',
+    ];
+    $role = [
+      '#theme' => 'server_style_guide_person_title',
+      '#title' => 'Admin',
+      '#text_size' => 'text-xs',
+      '#text_font' => 'text-emerald-800',
+    ];
+    $email = [
+      '#theme' => 'server_style_guide_person_button',
+      '#title' => 'Email',
+    ];
+    $phone = [
+      '#theme' => 'server_style_guide_person_button',
+      '#title' => 'Call',
+    ];
+
+    return [
+      '#theme' => 'server_style_guide_person',
+      '#image' => $image,
+      '#name' => $name,
+      '#job_title' => $job_title,
+      '#role' => $role,
+      '#email' => $email,
+      '#phone' => $phone,
     ];
   }
 
