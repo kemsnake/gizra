@@ -214,7 +214,6 @@ class StyleGuideController extends ControllerBase {
     ];
   }
 
-
   /**
    * Get the page title.
    *
@@ -222,17 +221,56 @@ class StyleGuideController extends ControllerBase {
    *   Render array.
    */
   protected function getPersonBlock(): array {
-    $account = User::load(6);
+    $account = User::load(4);
 
-    $style = ImageStyle::load('thumbnail');
-    $style_uri = $style->buildUri($account->get('user_picture')->entity->uri->value);
-    $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($style_uri);
+    $image = [
+      '#theme' => 'image_style',
+      '#style_name' => 'thumbnail',
+      '#uri' => $account->get('user_picture')->entity->uri->value,
+      '#attributes' => [
+        'class' => [
+          'w-32',
+          'h-32',
+          'rounded-3xl',
+        ],
+      ],
+    ];
+
+    $name = [
+      '#theme' => 'server_style_guide_person_title',
+      '#title' => $account->getAccountName(),
+      '#text_font' => 'text-sm',
+      '#text_size' => 'text-gray-900',
+    ];
+    $job_title = [
+      '#theme' => 'server_style_guide_person_title',
+      '#title' => 'Paradigm Representative',
+      '#text_size' => 'text-sm',
+      '#text_font' => 'text-gray-500',
+    ];
+    $role = [
+      '#theme' => 'server_style_guide_person_title',
+      '#title' => 'Admin',
+      '#text_size' => 'text-xs',
+      '#text_font' => 'text-emerald-800',
+    ];
+    $email = [
+      '#theme' => 'server_style_guide_person_button',
+      '#title' => 'Email',
+    ];
+    $phone = [
+      '#theme' => 'server_style_guide_person_button',
+      '#title' => 'Call',
+    ];
+
     return [
       '#theme' => 'server_style_guide_person',
-      '#image_src' => $image_url,
-      '#name' => $account->getAccountName(),
-      '#job_title' => 'Paradigm Representative',
-      '#role' => 'Admin',
+      '#image' => $image,
+      '#name' => $name,
+      '#job_title' => $job_title,
+      '#role' => $role,
+      '#email' => $email,
+      '#phone' => $phone,
     ];
   }
 
